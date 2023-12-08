@@ -12,7 +12,7 @@ pipeline {
                 script {
                     echo 'Building the application...'
                     // Assuming your App.java is in the specified location
-                    sh 'clean install'
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             // Replace the following with your deployment steps
 
             // Example: Deploying to Tomcat using the manager-script role
-            sh 'curl -v -u tomcat:tomcat -T target/dummyPipelineProjectV1.war http://localhost:8081/manager/text/deploy?path=/dummyPipelineProjectV1&update=true'
+            sh 'start /B curl -v -u tomcat:tomcat -T target/dummyPipelineProjectV1.war http://localhost:8081/manager/text/deploy?path=/dummyPipelineProjectV1&update=true'
 
             // Replace 'dummyPipelineProjectV1' with the context path of your application
 
@@ -41,6 +41,7 @@ pipeline {
         }
     }
 }
+
     }
 
     post {
