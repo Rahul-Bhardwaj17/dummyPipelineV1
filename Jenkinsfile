@@ -1,28 +1,55 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+        jdk 'JDK'
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                // Add your build steps here
+                script {
+                    echo 'Building the application...'
+                    // Assuming your App.java is in the specified location
+                    sh 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
-                // Add your deployment steps here
+                script {
+                    echo 'Deploying the application to Tomcat...'
+                    // Replace the following with your deployment steps
+
+                    // Example: Deploying to Tomcat using the manager-script role
+                    sh 'curl -v -u tomcat:tomcat -T target/dummyPipelineProjectV1.war http://localhost:8081/manager/text/deploy?path=/dummyPipelineProjectV1&update=true'
+
+                    // Replace 'dummyPipelineProjectV1' with the context path of your application
+
+                    // Add your actual deployment commands here
+                }
             }
         }
     }
 
     post {
+      
         success {
-            echo 'Pipeline succeeded! Send notifications or perform additional actions here.'
+            echo 'Tests passed! Send notifications or perform additional actions here.'
         }
         failure {
-            echo 'Pipeline failed! Send notifications or perform cleanup actions here.'
+            echo 'Tests failed! Send notifications or perform cleanup actions here.'
         }
     }
 }
