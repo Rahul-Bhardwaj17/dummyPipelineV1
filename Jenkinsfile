@@ -12,7 +12,7 @@ pipeline {
                 script {
                     echo 'Building the application...'
                     // Assuming your App.java is in the specified location
-                    sh 'mvn clean install'
+                    sh 'clean install'
                 }
             }
         }
