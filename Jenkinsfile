@@ -27,20 +27,20 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                script {
-                    echo 'Deploying the application to Tomcat...'
-                    // Replace the following with your deployment steps
+    steps {
+        script {
+            echo 'Deploying the application to Tomcat...'
+            // Replace the following with your deployment steps
 
-                    // Example: Deploying to Tomcat using the manager-script role
-                    sh 'curl -v -u tomcat:tomcat -T target/dummyPipelineProjectV1.war http://localhost:8081/manager/text/deploy?path=/dummyPipelineProjectV1&update=true'
+            // Example: Deploying to Tomcat using the manager-script role
+            sh 'curl -v -u tomcat:tomcat -T target/dummyPipelineProjectV1.war http://localhost:8081/manager/text/deploy?path=/dummyPipelineProjectV1&update=true'
 
-                    // Replace 'dummyPipelineProjectV1' with the context path of your application
+            // Replace 'dummyPipelineProjectV1' with the context path of your application
 
-                    // Add your actual deployment commands here
-                }
-            }
+            // Add your actual deployment commands here
         }
+    }
+}
     }
 
     post {
